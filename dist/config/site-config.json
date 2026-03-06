@@ -1,9 +1,9 @@
 {
     "assets_note": "make sure to host assets aheads of time and use absolute urls for paths",
 
-    "cfde_logo": "https://a-shilin.github.io/site-shell/src/assets/cfde.png",
-    "tissue_logo": "https://a-shilin.github.io/site-shell/src/assets/liver.png",
-    "cfde_wheel": "https://a-shilin.github.io/site-shell/src/assets/cfde_unified_icon.png",
+    "cfde_logo": "assets/cfde.png",
+    "tissue_logo": "assets/liver.png",
+    "cfde_wheel": "assets/cfde_unified_icon.png",
 
     "tissue": "Liver",
 

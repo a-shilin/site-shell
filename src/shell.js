@@ -10,7 +10,7 @@ class SiteShell extends HTMLElement {
     const configUrl = this.getAttribute("config") || "config/site-config.json"
     const base = this.getAttribute("base") || ""
 
-    const config = await loadConfig(configUrl)
+    const config = await loadConfig(configUrl + "?v=" + Date.now())
     const currentPath = getCurrentPath()
 
     // Capture existing children
