@@ -1,0 +1,17 @@
+{
+    "assets_note": "make sure to host assets aheads of time and use absolute urls for paths",
+
+    "cfde_logo": "/src/assets/cfde.png",
+    "tissue_logo": "/src/assets/liver.png",
+    "cfde_wheel": "/src/assets/cfde_unified_icon.png",
+
+    "tissue": "Liver",
+
+    "menu": [
+        { "label": "Home", "path": "/" },
+        { "label": "Docs", "path": "/docs" },
+        { "label": "API", "path": "/api" }
+    ],
+
+    "footer": "© Broad Institute"
+}
