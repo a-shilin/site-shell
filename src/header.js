@@ -1,6 +1,9 @@
 
+import { resolveAsset } from "./utils/resolve-asset.js"
+
 export function buildHeader(config, currentPath, base) {
 
+    /*
   const nav = config.menu.map(item => {
 
     const fullPath = base + item.path
@@ -12,13 +15,14 @@ export function buildHeader(config, currentPath, base) {
       </a>
     `
   }).join("")
+  */
 
   return `
     <header class="site-header">
         <div class="nav">
             <div class="nav-left">
-                <img src="${config.cfde_logo}"/>
-                <img src="${config.tissue_logo}"/>
+                <img src="${resolveAsset(config.cfde_logo)}"/>
+                <img src="${resolveAsset(config.tissue_logo)}"/>
             </div>
             <a class="nav-title" href="#">
                 <!--<img src="images/title.png" />-->
@@ -72,7 +76,7 @@ export function buildHeader(config, currentPath, base) {
                 </div>
             </div>
             <div class="nav-right">
-                <img src="${config.cfde_wheel}" />
+                <img src="${resolveAsset(config.cfde_wheel)}" />
             </div>
         </div>
     </header>

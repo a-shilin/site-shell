@@ -1,31 +1,22 @@
 import { loadConfig } from "./config-loader.js"
 import { getCurrentPath } from "./utils/router.js"
+import { resolveAsset } from "./utils/resolve-asset.js"
 import { buildHeader } from "./header.js"
 import { buildFooter } from "./footer.js"
 
-class SiteShell extends HTMLElement {
+export async function initShell() {
 
-  async connectedCallback() {
+  const headerContainer = document.getElementById("site-header")
+  const footerContainer = document.getElementById("site-footer")
 
-    const configUrl = this.getAttribute("config") || "config/site-config.json"
-    const base = this.getAttribute("base") || ""
+  if (!headerContainer || !footerContainer) return
 
-    const config = await loadConfig(configUrl + "?v=" + Date.now())
-    const currentPath = getCurrentPath()
+  const configUrl = headerContainer.dataset.config || resolveAsset("config/site-config.json")
+  const base = headerContainer.dataset.base || ""
 
-    // Capture existing children
-    const content = this.innerHTML
+  const config = await loadConfig(configUrl)
+  const currentPath = getCurrentPath()
 
-    this.innerHTML = `
-      ${buildHeader(config, currentPath, base)}
-
-      <main class="site-content">
-        ${content}
-      </main>
-
-      ${buildFooter(config)}
-    `
-  }
+  headerContainer.innerHTML = buildHeader(config, currentPath, base)
+  footerContainer.innerHTML = buildFooter(config)
 }
-
-customElements.define("site-shell", SiteShell)
