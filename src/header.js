@@ -1,23 +1,63 @@
 
 import { resolveAsset } from "./utils/resolve-asset.js"
 
-export function buildHeader(config, currentPath, base) {
-
+function isActive (itemPath, currentUrl) {
     /*
-  const nav = config.menu.map(item => {
+    to dynamically set navigation itema to active state when on a page
+    we check for the substring of each links path in the current url.
+    to mitigate false-positives (like '/page' activating when url is '/page2' for example)
+    we check for common url boundary characters (?#/&).
+    */
+    if (!itemPath) return false
+    const escaped = itemPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const pattern = new RegExp(`${escaped}($|[?#/&])`)
+    console.log(escaped, pattern.test(currentUrl));
+    return pattern.test(currentUrl)
+}
 
-    const fullPath = base + item.path
-    const active = currentPath.startsWith(item.path)
+function buildMenu(menu) {
+    //get current url
+    const currentUrl = window.location.href;
+    //build the menu
+    const items = menu.map(item => {
+        const submenu = item.submenu?.length
+            ? `
+            <div class="submenu">
+                ${item.submenu.map(sub => `
+                <a class="submenu-item ${isActive(sub.path, currentUrl) ? 'active' : ''}" href="${sub.path}">
+                    ${sub.label}
+                </a>
+                `).join("")}
+            </div>
+            `
+            : ""
+
+        return `
+        <div class="menu-item-wrapper ${isActive(item.path, currentUrl) ? 'active' : ''}">
+            ${
+                item.path
+                ? `<a class="menu-item" href="${item.path}">${item.label}</a>`
+                : `<div class="menu-item">${item.label}</div>`
+            }
+            ${submenu}
+        </div>
+        `
+    }).join("")
 
     return `
-      <a href="${fullPath}" class="${active ? "active" : ""}">
-        ${item.label}
-      </a>
+    <div class="main-menu">
+        ${items}
+    </div>
     `
-  }).join("")
-  */
+}
 
-  return `
+export function buildHeader(config) {
+    setTimeout(() => {
+        updateActiveMenu()
+        watchUrlChanges()
+    }, 0)
+
+    return `
     <header class="site-header">
         <div class="nav">
             <div class="nav-left">
@@ -42,26 +82,7 @@ export function buildHeader(config, currentPath, base) {
                 </div>
                 <div class="menu-wrapper">
                     <div class="main-menu">
-                        <div class="menu-item-wrapper">
-                            <a class="menu-item" href="#item1">Item 1</a>
-                        </div>
-                        <div class="menu-item-wrapper" href="#item2">
-                            <a class="menu-item" href="#item2">Item 2</a> 
-                        </div>
-                        <div class="menu-item-wrapper">
-                            <a class="menu-item" href="#item3">Item 3</a>
-                            <div class="submenu">
-                                <a class="submenu-item" href="#subitem1">Subitem 1</a>
-                                <a class="submenu-item" href="#subitem2">Subitem 2</a>
-                                <a class="submenu-item" href="#subitem3">Subitem 3</a>
-                            </div>
-                        </div>
-                        <div class="menu-item-wrapper">
-                            <div class="menu-item">Item 4</div>
-                        </div>
-                        <div class="menu-item-wrapper">
-                            <div class="menu-item">Item 5</div>
-                        </div>
+                        ${buildMenu(config.menu)}
                     </div>
                     <div class="top-menu">
                         <div class="menu-item">
@@ -80,18 +101,28 @@ export function buildHeader(config, currentPath, base) {
             </div>
         </div>
     </header>
-  `
+    `
+}
 
+/*
+the following are used to update 'active' menu items
+when the url changes, but the page doesnt refresh
+*/
+function watchUrlChanges() {
+    window.addEventListener("popstate", updateActiveMenu)
+}
 
-  return `
-    <header class="site-header">
-
-      <img class="logo" src="${config.logo}" />
-
-      <nav class="site-nav">
-        ${nav}
-      </nav>
-
-    </header>
-  `
+function updateActiveMenu() {
+    const currentUrl = window.location.href
+    // update submenu items
+    document.querySelectorAll(".submenu-item").forEach(link => {
+        const href = link.getAttribute("href")
+        const active = isActive(href, currentUrl);
+        link.classList.toggle("active", active)
+    })
+    document.querySelectorAll(".menu-item-wrapper").forEach(link => {
+        const href = link.getAttribute("href")
+        const active = isActive(href, currentUrl);
+        link.classList.toggle("active", active)
+    })
 }

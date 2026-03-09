@@ -4,14 +4,122 @@
     "cfde_logo": "assets/cfde.png",
     "tissue_logo": "assets/liver.png",
     "cfde_wheel": "assets/cfde_unified_icon.png",
+    "drc_logo": "assets/drc_portrait.png",
+    "kc_logo": "assets/cfde_kc_logo_c.png",
+    "nih_logo": "assets/NIH_logo.png",
 
     "tissue": "Liver",
 
     "menu": [
-        { "label": "Home", "path": "/" },
-        { "label": "Docs", "path": "/docs" },
-        { "label": "API", "path": "/api" }
+        { 
+            "label": "About",
+            "path": "#about",
+            "submenu": [
+                {
+                    "label": "About the Portal",
+                    "path": "#about-the-portal"
+                },{
+                    "label": "Consortium",
+                    "path": "#consortium"
+                },{
+                    "label": "Governance",
+                    "path": "#governance"
+                }
+            ]
+        },{ 
+            "label": "Liver Atlas",
+            "submenu": [
+                {
+                    "label": "Cell Atlas",
+                    "path": "#cell-atlas"
+                },{
+                    "label": "Functional Atlas",
+                    "path": "#functional-atlas"
+                },{
+                    "label": "Disease Atlas",
+                    "path": "#disease-atlas"
+                }
+            ]
+        },{ 
+            "label": "Liver Insights",
+            "submenu": [
+                {
+                    "label": "Use Cases",
+                    "path": "#use-cases"
+                },{
+                    "label": "Liver-REVEAL",
+                    "path": "#reveal"
+                },{
+                    "label": "Hypothesis Engine",
+                    "path": "#hypothesis-engine"
+                }
+            ]
+        },{ 
+            "label": "Data and Resources",
+            "submenu": [
+                {
+                    "label": "Datasets",
+                    "path": "#datasets"
+                },{
+                    "label": "Data Model",
+                    "path": "#data-model"
+                },{
+                    "label": "Knowledge Graph",
+                    "path": "#knowledge-graph"
+                },{
+                    "label": "Ontologies",
+                    "path": "#ontologies"
+                },{
+                    "label": "Standards",
+                    "path": "#standards"
+                },{
+                    "label": "APIs",
+                    "path": "#apis"
+                },{
+                    "label": "Workflows",
+                    "path": "#workflows"
+                },{
+                    "label": "Controlled Vocabulary",
+                    "path": "#controlled-vocabulary"
+                },{
+                    "label": "Core Entities",
+                    "path": "#core-entities"
+                }
+            ]
+        },{ 
+            "label": "Connect",
+            "submenu": [
+                {
+                    "label": "Publications",
+                    "path": "#publications"
+                },{
+                    "label": "Events",
+                    "path": "#events"
+                },{
+                    "label": "Outreach",
+                    "path": "#outreach"
+                },{
+                    "label": "Contact",
+                    "path": "#Contact"
+                }
+            ]
+        },{ 
+            "label": "Help",
+            "submenu": [
+                {
+                    "label": "Tutorials",
+                    "path": "#tutorials"
+                },{
+                    "label": "Documentation",
+                    "path": "#documentation"
+                },{
+                    "label": "FAQ",
+                    "path": "#faq"
+                }
+            ]
+        }
     ],
+    
 
     "footer": "© Broad Institute"
 }
