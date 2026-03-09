@@ -1,5 +1,4 @@
-import { loadConfig } from "./config-loader.js"
-import { getCurrentPath } from "./utils/router.js"
+import { loadConfig } from "./utils/config-loader.js"
 import { resolveAsset } from "./utils/resolve-asset.js"
 import { buildHeader } from "./header.js"
 import { buildFooter } from "./footer.js"
@@ -15,7 +14,7 @@ export async function initShell() {
   const base = headerContainer.dataset.base || ""
 
   const config = await loadConfig(configUrl)
-  const currentPath = getCurrentPath()
+  const currentPath = window.location.pathname;
 
   headerContainer.innerHTML = buildHeader(config, currentPath, base)
   footerContainer.innerHTML = buildFooter(config)

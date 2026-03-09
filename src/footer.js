@@ -18,8 +18,8 @@ function buildMenu(menu) {
         <div style="display:flex; flex-direction:column; gap:3px">
             ${
                 item.path
-                ? `<a class="bold" href="${item.path}">${item.label}</a>`
-                : `<a class="bold">${item.label}</a>`
+                ? `<a style="font-weight:bold" href="${item.path}">${item.label}</a>`
+                : `<a style="font-weight:bold">${item.label}</a>`
             }
             ${submenu}
         </div>
