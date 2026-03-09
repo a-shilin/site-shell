@@ -71,13 +71,13 @@ Basic HTML Example:
 
 <body>
 
-<site-shell config="https://a-shilin.github.io/site-shell/config/site-config.json">
-
-  <div class="my-content">
+<div class="site-shell">
+  <div id="site-header" data-config=""https://a-shilin.github.io/site-shell/config/site-config.json"></div>
+  <div id="my-content">
     <h1>Hello</h1>
   </div>
-
-</site-shell>
+  <div id="site-footer"></div>
+</div>
 
 </body>
 </html>
@@ -126,15 +126,13 @@ Include the script in your main HTML template (for example `index.html`):
 Then wrap your Vue mount point with the shell:
 
 ```
-<body>
-
-<site-shell config="https://a-shilin.github.io/site-shell/config/site-config.json">
-  <div id="app"></div>
-</site-shell>
-
-<script src="/dist/build.js"></script>
-
-</body>
+<div class="site-shell">
+  <div id="site-header" data-config=""https://a-shilin.github.io/site-shell/config/site-config.json"></div>
+  <div id="my-content">
+    <h1>Hello</h1>
+  </div>
+  <div id="site-footer"></div>
+</div>
 ```
 
 Vue will mount normally inside `#app`, and the shell will provide the shared header and footer.
@@ -152,13 +150,13 @@ Add the script to your main HTML file (for example `public/index.html` in a Crea
 Then wrap the React root element:
 
 ```
-<body>
-
-<site-shell config="https://a-shilin.github.io/site-shell/config/site-config.json">
-  <div id="root"></div>
-</site-shell>
-
-</body>
+<div class="site-shell">
+  <div id="site-header" data-config=""https://a-shilin.github.io/site-shell/config/site-config.json"></div>
+  <div id="my-content">
+    <h1>Hello</h1>
+  </div>
+  <div id="site-footer"></div>
+</div>
 ```
 
 React will render its application into `#root` while the shell handles the shared site layout.
